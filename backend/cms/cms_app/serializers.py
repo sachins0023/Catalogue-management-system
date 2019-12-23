@@ -1,4 +1,4 @@
-from .models import Product, Brand, Category, Specifications
+from .models import Product, Brand, Category
 from rest_framework import serializers
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -19,19 +19,20 @@ class BrandSerializer(serializers.ModelSerializer):
         
 class ProductSerializer(serializers.ModelSerializer):
     '''
-    Serialization of Product model
+    Serialization of Product model for listing
     '''
     category = CategorySerializer()
     brand = BrandSerializer()
+    specifications = serializers.JSONField()
     class Meta:
         model = Product
-        fields = ['id', 'name', 'category', 'brand']
+        fields = ['id', 'name', 'category', 'brand', 'specifications']
         
-class SpecificationsSerializer(serializers.ModelSerializer):
+class ProductCreateSerializer(serializers.ModelSerializer):
     '''
-    Serialization of Specifications model
+    Serialization of Product model only for creation
     '''
-    product = ProductSerializer()
+    specifications = serializers.JSONField()
     class Meta:
-        model = Specifications
-        fields = ['id', 'key', 'value', 'unit', 'product']
+        model = Product
+        fields = ['id', 'name', 'category', 'brand', 'specifications']

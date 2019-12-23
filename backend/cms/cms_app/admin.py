@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Product, Brand, Category, Specifications
+from .models import Product, Brand, Category
 
 # Register your models here.
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'brand', 'category')
+    list_display = ('name', 'brand', 'category', 'specifications')
     
     
 @admin.register(Brand)
@@ -14,8 +14,5 @@ class ProductAdmin(admin.ModelAdmin):
     
 @admin.register(Category)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'parent_category',)
+    list_display = ('name', 'parent_category')
     
-@admin.register(Specifications)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('key', 'value', 'unit', 'product')

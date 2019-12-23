@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import ProductSerializer, BrandSerializer, CategorySerializer, SpecificationsSerializer
-from .models import Product, Brand, Category, Specifications
+from .serializers import ProductSerializer, BrandSerializer, CategorySerializer, ProductCreateSerializer
+from .models import Product, Brand, Category
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -48,6 +48,12 @@ class BrandViewSet(viewsets.ViewSet):
 class ProductViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Product.objects.all()
+        brand = request.query_params.get('brand', None)
+        if brand:
+            queryset = queryset.filter(brand__id=int(brand))
+        category = request.query_params.get('category', None)
+        if category:
+            queryset = queryset.filter(category__id= int(category))
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
     
@@ -58,22 +64,8 @@ class ProductViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
     def create(self, request):
-        pass
-    
-class SpecificationsViewSet(viewsets.ViewSet):
-    def list(self, request):
-        queryset = Specifications.objects.all()
-        serializer = SpecificationsSerializer(queryset, many=True)
-        return Response(serializer.data)
-    
-    def retrieve(self, request, pk=None):
-        queryset = Specifications.objects.all()
-        specifications = get_object_or_404(queryset, pk=pk)
-        serializer = SpecificationsSerializer(specifications)
-        return Response(serializer.data)
-    
-    def create(self, request):
-        serializer = SpecificationsSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        serializer = ProductCreateSerializer(data=request.data)
+        serializer.is_valid(raise_exception= True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
