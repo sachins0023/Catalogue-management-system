@@ -131,7 +131,7 @@ class ProductListing extends Component {
                     <div className="product-area-details">
                         Category: {this.state.currentProduct.category.name}
                     </div><div className="product-area-details">
-                        Parent Category: {this.state.currentProduct.category.parent_category.name}
+                        Parent Category: {this.state.currentProduct.category.parent_category ? this.state.currentProduct.category.parent_category.name : ''}
                     </div>
                     <div className="product-area-details">
                         Specification: {this.state.currentProduct.specifications.length ? this.state.currentProduct.specifications.map((item,index) => (
