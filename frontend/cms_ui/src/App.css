@@ -1,0 +1,151 @@
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .App {
+        width: 100%;
+    }
+    
+    .ProductListing {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .heading {
+        display: flex;
+        width: 100%;
+        background-color: green;
+        margin-top: 30px;
+        margin-bottom: 80px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .total-content {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .product-heading,
+    .category-heading,
+    .brand-heading {
+        font-weight: 700;
+        font-size: 24px;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .product-content,
+    .category-content,
+    .brand-content {
+        background-color: peachpuff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-left: 50px;
+        margin-right: 50px;
+        border: 2px solid grey;
+    }
+    
+    .individual-item {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    
+    .cell {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .cell:hover {
+        background-color: skyblue;
+    }
+    
+    .product-item {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background-color: skyblue;
+        margin-bottom: 50px;
+        border-radius: 10px;
+        width: 600px;
+        height: 500px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .product-item-heading {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .product-area-details {
+        margin-top: 10px;
+    }
+    
+    .product-item-breadcrumb {
+        color: darkblue
+    }
+    
+    .creation-centre {
+        width: 100%;
+        justify-content: space-around;
+        display: flex;
+    }
+    
+    .creation-centre button,
+    .creation-centre a {
+        margin-bottom: 50px;
+        padding: 20px;
+        color: white;
+        border: none;
+        text-decoration: none;
+        transition: 0.5s ease;
+        border-radius: 5px;
+        background-color: #3D9AE9;
+    }
+    
+    .creation-centre button:hover,
+    .creation-centre a:hover {
+        background-color: blue;
+        color: white;
+    }
+    
+    .close-button {
+        margin-top: 30px;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: white;
+        color: red;
+        transition: 0.5s ease;
+    }
+    
+    .close-button:hover {
+        background-color: red;
+        color: white;
+    }
+    
+    .breadcrumb-item {
+        font-size: 12px;
+    }
+    
+    .breadcrumb-item:hover {
+        text-decoration: underline;
+        color: blue;
+    }
