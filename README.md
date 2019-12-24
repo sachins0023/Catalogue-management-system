@@ -69,7 +69,9 @@ Dependencies are:
 "axios": "^0.19.0",
 "react": "^16.12.0",
 "react-dom": "^16.12.0",
+"react-redux": "^7.1.3",
 "react-router-dom": "^5.1.2",
+"redux": "^4.0.4",
 "react-scripts": "0.9.5"
 ```
 Go to 'Catalogue-management-system/frontend/cms_ui/' and type the following code in the terminal:
