@@ -1,14 +1,31 @@
 from .models import Product, Brand, Category
 from rest_framework import serializers
 
+class ParentCategorySeralizer(serializers.ModelSerializer):
+    '''
+    Serialization of Parent Category model
+    '''
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
+
 class CategorySerializer(serializers.ModelSerializer):
+    '''
+    Serialization of Category model
+    '''
+    parent_category = ParentCategorySeralizer()
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'parent_category', 'get_breadcrumbs']
+
+class CategoryCreateSerializer(serializers.ModelSerializer):
     '''
     Serialization of Category model
     '''
     class Meta:
         model = Category
-        fields = ['id', 'name', 'parent_category', 'get_breadcrumbs']
-        
+        fields = ['name', 'parent_category']
+
 class BrandSerializer(serializers.ModelSerializer):
     '''
     Serialization of Brand model

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import ProductSerializer, BrandSerializer, CategorySerializer, ProductCreateSerializer
+from .serializers import ProductSerializer, BrandSerializer, CategorySerializer, ProductCreateSerializer, CategoryCreateSerializer
 from .models import Product, Brand, Category
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -21,7 +21,7 @@ class CategoryViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
     def create(self, request):
-        serializer = CategorySerializer(data=request.data)
+        serializer = CategoryCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
