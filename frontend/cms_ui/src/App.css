@@ -8,6 +8,7 @@
         width: 100%;
         justify-content: center;
         padding: 20px;
+        background-color: #DAE4FC;
     }
     
     .App {
@@ -25,7 +26,7 @@
     .heading {
         display: flex;
         width: 100%;
-        background-color: green;
+        color: #041220;
         margin-top: 30px;
         margin-bottom: 80px;
         text-align: center;
@@ -51,18 +52,18 @@
     .product-content,
     .category-content,
     .brand-content {
-        background-color: peachpuff;
         border-radius: 10px;
         padding: 20px;
-        margin-left: 50px;
-        margin-right: 50px;
-        border: 2px solid grey;
+        margin: 10px;
+        background-color: #fff;
     }
     
     .individual-item {
         display: flex;
         flex-direction: column;
         margin-top: 10px;
+        cursor: pointer;
+        color: #3D9AE9;
     }
     
     .cell {
@@ -70,10 +71,6 @@
         padding-right: 50px;
         padding-top: 10px;
         padding-bottom: 10px;
-    }
-    
-    .cell:hover {
-        background-color: skyblue;
     }
     
     .product-item {

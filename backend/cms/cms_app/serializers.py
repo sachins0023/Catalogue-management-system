@@ -16,7 +16,7 @@ class CategorySerializer(serializers.ModelSerializer):
     parent_category = ParentCategorySeralizer()
     class Meta:
         model = Category
-        fields = ['id', 'name', 'parent_category', 'get_breadcrumbs']
+        fields = ['id', 'name', 'parent_category', 'count_products', 'get_breadcrumbs']
 
 class CategoryCreateSerializer(serializers.ModelSerializer):
     '''
@@ -26,13 +26,21 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
         model = Category
         fields = ['name', 'parent_category']
 
-class BrandSerializer(serializers.ModelSerializer):
+class BrandCreateSerializer(serializers.ModelSerializer):
     '''
     Serialization of Brand model
     '''
     class Meta:
         model = Brand
         fields = ['id', 'name']
+
+class BrandSerializer(serializers.ModelSerializer):
+    '''
+    Serialization of Brand model
+    '''
+    class Meta:
+        model = Brand
+        fields = ['id', 'name', 'count_products']
         
 class ProductSerializer(serializers.ModelSerializer):
     '''

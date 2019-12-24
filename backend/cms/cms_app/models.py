@@ -20,6 +20,9 @@ class Category(models.Model):
         Returns the category with the category name.
         '''
         return self.name
+
+    def count_products(self):
+        return Product.objects.filter(category=self).count()
     
     def get_breadcrumbs(self):
         '''
@@ -50,6 +53,9 @@ class Brand(models.Model):
         Returns the brand with the brand name.
         '''
         return self.name
+
+    def count_products(self):
+        return Product.objects.filter(brand=self).count()
     
     
 class Product(models.Model):

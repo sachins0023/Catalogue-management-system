@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/ProductListing.css';
 
 class ProductListing extends Component {
 
@@ -40,35 +41,39 @@ class ProductListing extends Component {
         })
     }
     
-    updateProductListByCategory(event,index) {
-        let newProductList = [];
-        axios.get(`http://127.0.0.1:8000/product/`)
-        .then(res => {
-            const products = res.data;
-            for(let i=0;i<products.length;i++) {
-                if (products[i].category.id === index) {
-                    newProductList = [...newProductList, products[i]];
-                }
-            }
-            this.setState({ productList: newProductList});
-        })
+    updateProductListByCategory(category) {
+        if(category) {
+            axios.get('http://127.0.0.1:8000/product/?category='+String(category))
+            .then(res => {
+                const products = res.data;
+                this.setState({ productList: products});
+            });
+        } else  {
+            axios.get('http://127.0.0.1:8000/product')
+            .then(res => {
+                const products = res.data;
+                this.setState({ productList: products});
+            });
+        }
     }
 
-    updateProductListByBrand(event,index) {
-        let newProductList = [];
-        axios.get(`http://127.0.0.1:8000/product/`)
-        .then(res => {
-            const products = res.data;
-            for(let i=0;i<products.length;i++) {
-                if (products[i].brand.id === index) {
-                    newProductList = [...newProductList, products[i]];
-                }
-            }
-            this.setState({ productList: newProductList});
-        })
+    updateProductListByBrand(brand) {
+        if(brand) {
+            axios.get('http://127.0.0.1:8000/product/?brand='+String(brand))
+            .then(res => {
+                const products = res.data;
+                this.setState({ productList: products});
+            });
+        } else {
+            axios.get('http://127.0.0.1:8000/product/')
+            .then(res => {
+                const products = res.data;
+                this.setState({ productList: products});
+            });
+        }
     }
 
-    updateProductListFromProduct(event, item) {
+    updateProductListFromProduct(item) {
         let newProductList = [];
         axios.get(`http://127.0.0.1:8000/product/`)
         .then(res => {
@@ -97,14 +102,14 @@ class ProductListing extends Component {
                 Catalogue Management System
             </h1>
             <div className="creation-centre">
+                <Link to='/product/new' className="Product-create-button">
+                    Create new product
+                </Link>
                 <Link to="/category/new" className="category-create-button">
                     Create new category
                 </Link>
                 <Link to='/brand/new' className="Brand-create-button">
                     Create new brand
-                </Link>
-                <Link to='/product/new' className="Product-create-button">
-                    Create new product
                 </Link>
             </div>  
             {(this.state.currentProduct.name)?
@@ -115,11 +120,11 @@ class ProductListing extends Component {
                 <div className="product-area">
                     <div className="product-item-breadcrumb">
                         {this.state.currentProduct.category.get_breadcrumbs.map((item,index) =>(
-                            <div className="breadcrumb-item" key={index} >
-                                <div onClick={(event,item) => this.updateProductListFromProduct(event,index)}>
-                                    {'>'.repeat(index)}{item}
-                                </div>
-                            </div>
+                            <span className="breadcrumb-item" key={index} >
+                                <span onClick={(event,item) => this.updateProductListFromProduct(event,index)}>
+                                    {' / '.repeat(index)}{item}
+                                </span>
+                            </span>
                         ))}
                     </div>
                     <div className="product-area-details">
@@ -149,41 +154,27 @@ class ProductListing extends Component {
                     <div className="product-heading">
                         Products
                     </div>
-                    <table>
+                    <table className="catalog">
                         <thead>
                             <tr>
                             <th className="product details">Product name</th>
                             <th className="product details">Brand</th>
                             <th className="product details">Category</th>
-                            <th className="product details">Parent Category</th>
-                            <th className="product details">Breadcrumb</th>
-                            <th className="product details">Specifications</th>
                             </tr>
                         </thead>
                         <tbody>
                         {this.state.productList.map((item,index) => (
                             <tr className="individual-row" key={index}>
-                                    <td className="cell" onClick={(event, index) => this.accessProduct(event,item.id)}> 
-                                        {item.name}                                       
+                                    <td className="cell">
+                                        <Link to={'/product/'+item.id}>
+                                            {item.name}
+                                        </Link>                             
                                     </td>
                                     <td className="cell">                                      
                                         {item.brand.name}                                      
                                     </td>
                                     <td className="cell">                                       
                                         {item.category.name}                                        
-                                    </td>
-                                    <td className="cell">                                        
-                                        {item.category.parent_category ? item.category.parent_category.name : null}                                        
-                                    </td>
-                                    <td className="cell">                                       
-                                        {item.category.get_breadcrumbs.join('/')+'/'}                                    
-                                    </td>
-                                    <td className="cell">                                       
-                                        {item.specifications.length ? item.specifications.map((item,index) => (
-                                            <div className="specifications" key={index}>
-                                                {item.key}: {item.value} {(item.units)?(item.units):('')} 
-                                            </div>
-                                        )) : null}                                        
                                     </td>
                             </tr>))}
                         </tbody>
@@ -194,23 +185,28 @@ class ProductListing extends Component {
                     <div className="category-heading">
                         Categories
                     </div>
-                <ul>
-                    {this.state.categoryList.map((item,index) => (
-                        <div className="individual-item" onClick={(event, index) => this.updateProductListByCategory(event, item.id)} key={index}>
-                            {item.name}
+                    <ul>
+                        <div className="individual-item" onClick={() => this.updateProductListByCategory(null)}>
+                            All
                         </div>
-                    )
-                    )}
-                </ul>
+                        {this.state.categoryList.map((item,index) => (
+                            <div className="individual-item" onClick={() => this.updateProductListByCategory(item.id)} key={index}>
+                                {item.name+' ('+item.count_products+')'}
+                            </div>
+                        ))}
+                    </ul>
                 </div>
                 <div className="brand-content">
                     <div className="brand-heading">
                         Brands
                     </div>
                 <ul>
+                <div className="individual-item" onClick={() => this.updateProductListByBrand(null)}>
+                            All
+                        </div>
                     {this.state.brandList.map((item,index) => (
-                        <div className="individual-item" onClick={(event, index) => this.updateProductListByBrand(event, item.id)} key={index}>
-                            {item.name}
+                        <div className="individual-item" onClick={() => this.updateProductListByBrand(item.id)} key={index}>
+                            {item.name+' ('+item.count_products+')'}
                         </div>
                     )
                     )}

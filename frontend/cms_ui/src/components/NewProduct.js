@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import history from '../history';
 import '../styles/NewCategory.css';
+import { Link } from 'react-router-dom';
 
 class  NewProduct extends Component {
     constructor(props) {
@@ -119,7 +120,7 @@ class  NewProduct extends Component {
                             <input value={this.state.spec_key} onChange={(event) => this.setState({ spec_key: event.target.value })} type="text" placeholder="Key" />
                             <input value={this.state.spec_value} onChange={(event) => this.setState({ spec_value: event.target.value })} type="text" placeholder="Value" />
                             <input value={this.state.spec_unit} onChange={(event) => this.setState({ spec_unit: event.target.value })} type="text" placeholder="Unit (Optional)" />
-                            <button onClick={() => this.addSpec()}>Add</button>
+                            <button className="add-btn" onClick={() => this.addSpec()}>+</button>
                         </label>
                     </div>
                     <div>
@@ -130,6 +131,7 @@ class  NewProduct extends Component {
                         ))}
                     </div>
                     <div>
+                    <Link className="btn" to="/">Back</Link>
                         <button className="btn" onClick={() => this.submitProduct()}>Submit</button>
                     </div>
                 </div>

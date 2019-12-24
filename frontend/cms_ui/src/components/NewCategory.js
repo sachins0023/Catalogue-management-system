@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import history from '../history';
 import '../styles/NewCategory.css';
+import { Link } from 'react-router-dom';
 
 class NewCategory extends Component {
     constructor(props) {
@@ -69,6 +70,7 @@ class NewCategory extends Component {
                         </label>
                     </div>
                     <div>
+                    <Link className="btn" to="/">Back</Link>
                         <button className="btn" onClick={() => this.submitCategory()}>Submit</button>
                     </div>
                 </div>
