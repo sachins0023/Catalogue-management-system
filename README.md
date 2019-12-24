@@ -12,10 +12,6 @@ Unit. Eg. Key - Length, Value: 30 , Unit - cm can be a specification for a scale
 3. Category breadcrumb should be displayed on the product page.
 4. Product, Brand and Category names must be unique.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 You need to install the following packages for backend:
@@ -23,12 +19,14 @@ You need to install the following packages for backend:
 ```
 asgiref==3.2.3
 Django==3.0.1
+django-cors-headers==3.2.0
 django-jsonfield==1.4.0
 djangorestframework==3.11.0
 pkg-resources==0.0.0
 pytz==2019.3
 six==1.13.0
 sqlparse==0.3.0
+
 ```
 
 ### Installing
@@ -65,56 +63,29 @@ python3 manage.py runserver
 
 Your server is set up with all the APIs active.
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+For Frontend which is ReactJS,
+Dependencies are: 
+```
+"axios": "^0.19.0",
+"react": "^16.12.0",
+"react-dom": "^16.12.0",
+"react-router-dom": "^5.1.2",
+"react-scripts": "0.9.5"
+```
+Go to 'Catalogue-management-system/frontend/cms_ui/' and type the following code in the terminal:
 
 ```
-Give an example
+npm install
+```
+Then to run the react server, type the code:
+```
+npm start
 ```
 
-### And coding style tests
+The server has been set up and you are ready to go.
 
-Explain what these tests test and why
+### While navigating through UI
 
-```
-Give an example
-```
+A few mock data has been added to the sqlite database that is attached with the product. Also Click on the different categories listed in Categories column to list products filtered on categories and similarly click on the different brands in Brands column to list products filtered on Brands.
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+P.S:The aesthetics of the page is at the most basic level. Some more work could be put in to beautify the UI. The project has been completed keeping the sole aim as working completion rather than aesthetically pleasing. 
