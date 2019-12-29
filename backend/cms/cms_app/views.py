@@ -54,6 +54,13 @@ class ProductViewSet(viewsets.ViewSet):
         category = request.query_params.get('category', None)
         if category:
             queryset = queryset.filter(category__id= int(category))
+            categories = Category.objects.filter(parent_category__id=category)
+            i = 0
+            while(i < len(categories)):
+                categories = list(categories) + list(Category.objects.filter(parent_category__id=categories[i].id))
+                queries = Product.objects.all().filter(category__id= int(categories[i].id))
+                queryset = [*queryset,*queries]
+                i+=1
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
     
